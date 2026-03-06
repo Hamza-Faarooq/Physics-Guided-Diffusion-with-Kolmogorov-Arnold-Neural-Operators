@@ -1,0 +1,23 @@
+import torch
+from physics.loss import physics_loss
+
+
+def physics_correct(model, flow_field, coords, lr=0.1, steps=10):
+
+    flow_field = flow_field.clone().detach()
+
+    flow_field.requires_grad_(True)
+
+    optimizer = torch.optim.Adam([flow_field], lr=lr)
+
+    for _ in range(steps):
+
+        optimizer.zero_grad()
+
+        loss = physics_loss(model, coords)
+
+        loss.backward()
+
+        optimizer.step()
+
+    return flow_field.detach()
