@@ -1,12 +1,12 @@
 import torch
 import torch.optim as optim
 
-from models.diffusion_unet import UNet
-from diffusion.schedule import linear_beta_schedule, get_alphas
-from diffusion.forward import q_sample
+from __main__ import UNet
+from __main__ import linear_beta_schedule, get_alphas
+from __main__ import q_sample
 
 
-def train_diffusion(epochs=200):
+def train_diffusion(epochs=1000):
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
