@@ -1,0 +1,26 @@
+import torch
+import numpy as np
+from torch.utils.data import Dataset
+
+
+class CFDDataset(Dataset):
+
+    def __init__(self, path):
+
+        data = np.load(path)
+
+        self.coords = torch.tensor(data["coords"]).float()
+
+        velocity = torch.tensor(data["velocity"]).float()
+
+        pressure = torch.tensor(data["pressure"]).float()
+
+        self.targets = torch.cat([velocity, pressure], dim=1)
+
+    def __len__(self):
+
+        return len(self.coords)
+
+    def __getitem__(self, idx):
+
+        return self.coords[idx], self.targets[idx]
