@@ -1,0 +1,18 @@
+experiment:
+  name: reynolds_generalization
+
+training:
+  epochs: 5000
+  batch_size: 2048
+  learning_rate: 0.001
+
+diffusion:
+  timesteps: 1000
+  learning_rate: 0.0001
+
+flow:
+  reynolds_train: [50,100]
+  reynolds_test: [200,500]
+
+grid:
+  resolution: 128
